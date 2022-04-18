@@ -1,0 +1,40 @@
+
+.tab_menu > h1{
+    margin: 0.5rem auto;
+    font-size: 3rem;
+}
+
+.tab_box{
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 200px;
+    background: #ebeef4;
+}
+
+.tab_box > ul{
+    margin: 5rem 0;
+    padding-left: 0;
+    grid-area: list;
+    list-style: none;
+}
+
+.tab_box .tabs{
+    margin: 2px;
+    height: 3rem;
+    width: 100%;
+    background: #5d10a6d4;
+    border: 1px solid #9530f4;
+    text-align: center;
+    line-height: 3rem;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.2rem;
+    border-radius: 0.3rem; 
+}
+
+.tab_box .active{
+    background: #932ff0;
+}

@@ -1,0 +1,49 @@
+
+.home{
+    height: 100%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    align-items: center;
+    width: calc(100vw - 200px); 
+}
+
+.home > h1{
+    margin: 1rem;
+    font-size: 2rem;
+}
+.drop_box > span{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.drop_zone{
+    margin: 1rem  auto;
+    position: relative;
+    width: 700px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(222, 222, 222, 0.784);
+    border-radius: 0.8rem;
+    border: 2px dashed #000;
+}
+
+.drop_zone input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.drop_zone > span{
+    font-size: 2rem;
+}
+
+.select_file > label{
+    font-size: 1rem;
+}

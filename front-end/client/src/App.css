@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+.app {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  background: #f0f2f5;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.app > h1{
+  margin: 3rem auto;
+  font-size: 3rem;
+}
