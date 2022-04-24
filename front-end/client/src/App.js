@@ -4,7 +4,8 @@ import SignUp from './components/sign-up/SignUp';
 import Dashboard from './components/dashboard/Dashboard';
 import Home from './components/dashboard/home/Home';
 import Profile from './components/dashboard/profile/Profile';
-import { BrowserRouter as Router, Routes, Route , Navigate} from "react-router-dom";
+import Verify from './components/dashboard/verify/Verify';
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import "./App.css";
 
 const App = () => {
@@ -31,7 +32,10 @@ const App = () => {
             user && user._id ? <Home userId={user._id}/> : <SignIn setLoginUser={setLoginUser}/> 
           } />
           <Route path="/profile" element = {
-            user && user._id ? <Profile /> : <SignIn setLoginUser={setLoginUser}/> 
+            user && user._id ? <Profile userId={user._id}/> : <SignIn setLoginUser={setLoginUser}/> 
+          } />
+          <Route path="/verify" element = {
+            user && user._id ? <Verify userId={user._id}/> : <SignIn setLoginUser={setLoginUser}/> 
           } />
         </Routes>
       </Router>

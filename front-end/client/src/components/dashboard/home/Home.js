@@ -1,17 +1,15 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import "./home.css";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCloud } from '@fortawesome/react-fontawesome';
 import axios from "axios";
 
 const Home = ({userId}) => {
-    // const wrapperRef = useRef(null);
 
     const onFileDrop = (e) => {
         const newFile = e.target.files[0].name;
+        let path = (window.URL || window.webkitURL).createObjectURL(e.target.files[0]);
+
+        console.log(path)
         if (newFile) {
-            // const updatedList = [...fileList, newFile];
-            // setFileList(updatedList);
             fileUpload(newFile);
         }
     }
@@ -29,23 +27,35 @@ const Home = ({userId}) => {
         } 
     }
 
+    const copyToClickboard = () => {
+        navigator.clipboard.writeText('Hash code');
+    }
+
     return(
         <div className="home">
-            <h1>Home</h1>
-            <div className="drop_box">
-                <div className="drop_zone" >
-                    {/* <FontAwesomeIcon icon="fa-solid fa-cloud-arrow-up" /> */}
-                    <input type="file" value="" onChange={onFileDrop}/>
-                    <span>Drag and Drop your files</span>
+            <h1>Certify your Documents</h1>
+            <div className="home_container">
+                <h3>Drag and drop your files in below box to generate hash code.</h3>
+                <div className="drop_box">
+                    <div className="drop_zone" >
+                        <i className="fa-solid fa-cloud-arrow-up"></i>
+                        <input type="file" value="" onChange={onFileDrop}/>
+                        <span>Drag and Drop your files</span>
+                    </div>
+                    <span>OR</span>
+                    <div className="select_file">       
+                        <label htmlFor="file">Select file</label>                   
+                        <input type="file" name="files[]" id="file" />
+                    </div>
                 </div>
-                <span>OR</span>
-                <div className="select_file">       
-                    <label htmlFor="file">Select file</label>                   
-                    <input type="file" name="files[]" id="file" />
+                <div className="hash_section">
+                    <h3>Below is the generated hash code of your file.</h3>
+                    <div className="hash_box">
+                        <span>Hash code :</span>
+                        <h3>HashCode here</h3>
+                        <button className="copy_button" onClick={copyToClickboard}><i className="fa-solid fa-copy"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div className="hash_box">
-                <h1>Hash Code Here</h1>
             </div>
         </div>
     );

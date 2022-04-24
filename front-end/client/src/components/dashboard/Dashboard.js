@@ -7,9 +7,14 @@ const Dashboard = () => {
 
     const [tabState, setTabState] = useState(location.pathname);
 
+    setTimeout(() => {
+        setTabState(location.pathname)
+    }, 100);
+
     const tabsItem = [
         {id: 1, title: 'Home', value:'/home'}, 
         {id: 2, title: 'Profile', value:'/profile'},
+        {id: 3, title: 'Verify', value:'/verify'}
     ];
 
     return (

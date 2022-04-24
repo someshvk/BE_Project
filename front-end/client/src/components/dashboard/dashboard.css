@@ -30,11 +30,12 @@
     text-align: center;
     line-height: 3rem;
     cursor: pointer;
-    color: #fff;
+    color: rgba(255, 255, 255, 0.67);
     font-size: 1.2rem;
     border-radius: 0.3rem; 
 }
 
 .tab_box .active{
+    color: #fff;
     background: #932ff0;
 }

@@ -1,0 +1,72 @@
+
+.profile{
+    height: 100%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    align-items: center;
+    width: calc(100vw - 200px); 
+}
+
+.profile > h1{
+    margin-top: 2.5rem;
+    font-size: 2rem;
+}
+
+.profile_details{
+    margin: 4rem;
+    display: grid;
+    grid-template-areas: 'name email' 'files files';
+    grid-template-rows: auto fit-content;
+}
+
+.profile_details > span{
+    margin: 1rem; 
+    padding: 1rem;
+    padding-left: 1.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid rgb(186, 186, 186);
+}
+
+.name{
+    grid-area: name;
+    text-align: start;
+}
+.name > b{
+    font-size: 1.2rem;
+}
+.name > span{
+    padding-left: 1.5rem;
+}
+
+.email{
+    grid-area: email;
+    text-align: start;
+}
+.email > b{
+    font-size: 1.2rem;
+}
+.email > span{
+    padding-left: 1.5rem;
+}
+
+.files{
+    grid-area: files;
+    padding-left: 1rem;
+}
+.files > h2{
+    font-size: 1.2rem;
+}
+.files > ul{
+    list-style: decimal;
+    text-align: start;
+}
+
+.files > ul > li{
+    padding-left: 1rem;
+}
+
+.files > ul > li > span{
+    float: right;
+    padding-right: 10rem;
+}

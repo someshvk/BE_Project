@@ -71,17 +71,46 @@ app.post("/signup", (req, res)=> {
 });
 
 // route to configure fileupload request
-app.post("/fileupload", (req, res)=> {
+app.post("/fileupload", (req, res) => {
     const {userId, currentFile} = req.body;
-    User.findOneAndUpdate({_id: userId}, {$push : {fileList: currentFile}}, { returnNewDocument: true })
+    let entry = {};
+    entry.file = currentFile;
+    entry.hash = "hashCode";
+    User.findOneAndUpdate({_id: userId}, {$push : {fileList: entry}}, { returnNewDocument: true })
     .then(updatedDocument => {
         if(updatedDocument) {
-          console.log(`Successfully updated document: ${updatedDocument}.`)
+          console.log(`Successfully updated document.`)
         } else {
           console.log("No document matches the provided query.")
         }
       })
       .catch(err => console.error(`Failed to find and update document: ${err}`));
+});
+
+// getting user data from database
+app.get("/profile/:userId", (req, res) => {
+    const userId = req.params.userId;
+    User.findOne({_id: userId}, (err, user) => {
+        if(user){
+            res.send({name: user.name, email: user.email, files: user.fileList});
+        }
+        else{
+            res.send({message: "no user found"});
+        }
+    });
+});
+
+// route to configure verify request
+app.post("/verify", (req, res) => {
+    const {userId, currentFile} = req.body;
+    User.findOne({_id: userId}, (err, user) => {
+        if(user){
+            res.send({verified: true});
+        }
+        else{
+            res.send({message: "No user found"});
+        }
+    });
 });
 
 app.listen(8000,() => {
