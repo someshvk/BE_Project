@@ -1,31 +1,49 @@
 import React, {useState} from 'react';
 import './verify.css';
 import axios from "axios";
+import {create} from 'ipfs-http-client';
+import Hash from 'ipfs-only-hash';
 
 const Verify = ({userId}) => {
 
     const [isVerified, setIsVerified] = useState(undefined);
     const [isNeutral, setIsNeutral] = useState(true);
 
-    const onFileDrop = (e) => {
-        const newFile = e.target.files[0].name;
-        if (newFile) {
-            verifyFile(newFile);
-        }
+    async function ipfsClient() {
+        const ipfs = create('https://ipfs.infura.io:5001/api/v0');
+        return ipfs;
     }
 
-    const verifyFile = (currentFile) => {
-        const fileData = {userId, currentFile};
-        if(fileData){
-            axios.post("http://localhost:8000/verify", fileData)
-            .then( res => {
-                setIsNeutral(false);
-                setIsVerified(res.data.verified);
-            });
-        }
-        else {
-            alert("invlid file");
-        } 
+    const onFileDrop = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const newFile = e.target.files[0];
+        const reader = new window.FileReader();
+        reader.readAsArrayBuffer(newFile);
+        reader.onload = () => console.log("Onload ", Buffer(reader.result));
+        reader.onloadend = () => verifyFile(Buffer(reader.result));
+    }
+
+    const verifyFile = async (buffer) => {
+
+        const hashOfFile = await Hash.of(buffer);
+
+        const ipfs = await ipfsClient();
+
+        const response = ipfs.cat(hashOfFile);
+
+        console.log("response ", response)
+        // const fileData = {userId, currentFile};
+        // if(fileData){
+        //     axios.post("http://localhost:8000/verify", fileData)
+        //     .then( res => {
+        //         setIsNeutral(false);
+        //         setIsVerified(res.data.verified);
+        //     });
+        // }
+        // else {
+        //     alert("invlid file");
+        // } 
     }
 
     const copyToClickboard = () => {

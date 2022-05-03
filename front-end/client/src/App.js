@@ -45,35 +45,8 @@ const App = () => {
 
 export default App;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { Component } from "react";
 // import SimpleStorageContract from "./contracts/SimpleStorage.json";
 // import getWeb3 from "./getWeb3";
-
-// import "./App.css";
 
 // class App extends Component {
 //   state = { storageValue: 0, web3: null, accounts: null, contract: null };
@@ -133,5 +106,3 @@ export default App;
 //     );
 //   }
 // }
-
-// export default App;

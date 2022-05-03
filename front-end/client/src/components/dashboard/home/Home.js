@@ -1,34 +1,53 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./home.css";
-import axios from "axios";
+// import axios from "axios";
+import {create} from 'ipfs-http-client';
+import SimpleStorageContract from "../../../contracts/SimpleStorage.json";
+import getWeb3 from "../../../getWeb3";
 
 const Home = ({userId}) => {
 
-    const onFileDrop = (e) => {
-        const newFile = e.target.files[0].name;
-        let path = (window.URL || window.webkitURL).createObjectURL(e.target.files[0]);
+    const [ipfsHash, setIpfsHash] = useState('');
+    const [web3, setweb3] = useState(null);
+    const [account, setAccount] = useState(null);
 
-        console.log(path)
-        if (newFile) {
-            fileUpload(newFile);
-        }
+    useEffect(()=>{
+
+    });
+
+    async function ipfsClient() {
+        const ipfs = create('https://ipfs.infura.io:5001/api/v0');
+        return ipfs;
     }
 
-    const fileUpload = (currentFile) => {
-        const fileData = {userId, currentFile};
-        if(fileData){
-            axios.post("http://localhost:8000/fileupload", fileData)
-            .then( res => {
-                alert(res.data.message);
-            });
-        }
-        else {
-            alert("invlid file");
-        } 
+    const onFileDrop = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const newFile = e.target.files[0];
+        const reader = new window.FileReader();
+        reader.readAsArrayBuffer(newFile);
+        reader.onload = () => console.log("Onload ", Buffer(reader.result));
+        reader.onloadend = () => fileUpload(Buffer(reader.result));
+    }
+
+    const fileUpload = async (buffer) => {
+        const ipfs = await ipfsClient();
+        const fileCreated = await ipfs.add(buffer);
+        setIpfsHash(fileCreated.path);
+        // const fileData = {userId, currentFile};
+        // if(fileData){
+        //     axios.post("http://localhost:8000/fileupload", fileData)
+        //     .then( res => {
+        //         alert(res.data.message);
+        //     });
+        // }
+        // else {
+        //     alert("invlid file");
+        // } 
     }
 
     const copyToClickboard = () => {
-        navigator.clipboard.writeText('Hash code');
+        navigator.clipboard.writeText(ipfsHash);
     }
 
     return(
@@ -52,7 +71,7 @@ const Home = ({userId}) => {
                     <h3>Below is the generated hash code of your file.</h3>
                     <div className="hash_box">
                         <span>Hash code :</span>
-                        <h3>HashCode here</h3>
+                        <h3>{ipfsHash}</h3>
                         <button className="copy_button" onClick={copyToClickboard}><i className="fa-solid fa-copy"></i></button>
                     </div>
                 </div>
