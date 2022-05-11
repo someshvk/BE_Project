@@ -17,7 +17,7 @@ const App = () => {
     <div className="app">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
         <TabsMenu homeRef={homeRef} profileRef={profileRef} verifyRef={verifyRef}/>
-        <Home reference={homeRef} setFileListChanged={setFileListChanged} />
+        <Home reference={homeRef} fileListChanged={fileListChanged} setFileListChanged={setFileListChanged} />
         <Verify reference={verifyRef} />
         <Profile reference={profileRef} fileListChanged={fileListChanged} />
     </div>

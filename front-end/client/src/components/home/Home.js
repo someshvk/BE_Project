@@ -79,7 +79,7 @@ fileUpload = async () => {
     fileHashList.push(response);
     localStorage.setItem("fileHashList", JSON.stringify(fileHashList));
   }
-  this.props.setFileListChanged(true);
+  this.props.setFileListChanged(!this.props.fileListChanged);
 
   this.setState({ipfsHash: fileCreated.path});
 }

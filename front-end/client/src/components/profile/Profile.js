@@ -3,10 +3,10 @@ import "./profile.css";
 
 const Profile = ({reference, fileListChanged}) => {
 
-    const [fileList, setFileList] = useState(JSON.parse(localStorage.getItem("fileHashList")));
+    const [fileList, setFileList] = useState([...JSON.parse(localStorage.getItem("fileHashList"))]);
 
     useEffect(()=>{
-        setFileList(JSON.parse(localStorage.getItem("fileHashList")));
+        setFileList([...JSON.parse(localStorage.getItem("fileHashList"))]);
     }, [fileListChanged]);
     return(
         <div className="profile" id="profile" ref={reference}>
