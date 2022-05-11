@@ -15,12 +15,13 @@
 
 .profile_details{
     height: fit-content;
-    width: calc(100vw - 300px); 
+    width: calc(100vw - 400px); 
     margin: 4rem;
     border-radius: 0.7rem;
     border: 1px solid rgb(186, 186, 186);
     padding: 1rem;
     padding-left: 1.5rem;
+    background: rgb(245, 231, 250);
 }
 
 .profile_details > span{

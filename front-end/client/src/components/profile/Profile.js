@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./profile.css";
 
-const Profile = ({fileListChanged}) => {
+const Profile = ({reference, fileListChanged}) => {
 
     const [fileList, setFileList] = useState(JSON.parse(localStorage.getItem("fileHashList")));
 
@@ -9,18 +9,17 @@ const Profile = ({fileListChanged}) => {
         setFileList(JSON.parse(localStorage.getItem("fileHashList")));
     }, [fileListChanged]);
     return(
-        <div className="profile">
+        <div className="profile" id="profile" ref={reference}>
             <h1>My Profile</h1>
             <div className="profile_details">
                 <span className="files">
                     <h2>Submitted Files</h2>
                     <ul>
                         {
-                            fileList.map((files, index) => {
+                            fileList.map((hash, index) => {
                                 return(
                                     <li key={index}>
-                                        {files.file}
-                                        <span>{files.hash}</span>
+                                        {hash}
                                     </li>
                                 );
                             })

@@ -44,9 +44,6 @@ instantiateContract = async () => {
       this.setState({ accounts: account[0] })
       // Get the value from the contract to prove it worked.
       return this.state.contract.methods.get.call(account[0])
-    }).then((ipfsHash) => {
-      // Update state with the result.
-      return this.setState({ ipfsHash })
     })
   })
 };
@@ -73,7 +70,7 @@ fileUpload = async () => {
 
   const response = await this.state.contract.methods.get().call();
 
-//   this.setState({ipfs});
+  this.setState({ipfsHash: hashOfFile});
 
   if (response  === hashOfFile){
     this.setState({isVerified: true, isNeutral: false});
@@ -110,14 +107,14 @@ render() {
         </div>
         <div className="verify_hash_section">
             {
-                isNeutral ? undefined 
+                this.state.isNeutral ? undefined 
                 : 
-                isVerified ? <h3 style={{ color : 'green' }}>Hurray! The file is already notarized. Below are the details,</h3>
+                this.state.isVerified ? <h3 style={{ color : 'green' }}>Hurray! The file is already notarized. Below are the details,</h3>
                 :
                 <h3 style={{ color : 'red' }}>Sorry! The file is not notarized, notarize first and then try.</h3>
             }
             <div className={
-                isNeutral ? "verify_hash_box" : isVerified  ? 'verified verify_hash_box' : 'unverified verify_hash_box'
+                this.state.isNeutral ? "verify_hash_box" : this.state.isVerified  ? 'verified verify_hash_box' : 'unverified verify_hash_box'
                 }>
                 <span>Hash code :</span>
                 <h3>{this.state.ipfsHash}</h3>
