@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@truffle/hdwallet-provider": "^2.0.8"
+    "@truffle/hdwallet-provider": "^2.0.8",
+    "gh-pages": "^4.0.0"
   }
 }
